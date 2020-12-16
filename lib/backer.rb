@@ -17,13 +17,11 @@ class Backer
     end
 
     def backed_projects
-        backed_projects = []
-        ProjectBacker.all.each do |projectbacker|
-            if projectbacker.backer == self
-                backed_projects << projectbacker.project
-            end
+        ProjectBacker.all.select do |projectbacker|
+            projectbacker.backer == self
+        end.map do |projectbacker|
+            projectbacker.project
         end
-        backed_projects   
     end
 
 
